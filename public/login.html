@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <main class="page narrow">
+      <section class="panel">
+        <a class="back-link" href="/">Home</a>
+        <h1>Login</h1>
+        <p class="muted">
+          This page is part of the review exercise. Inspect both the browser logic and the server route.
+        </p>
+
+        <form id="login-form" class="stacked-form">
+          <label>
+            Username
+            <input type="text" name="username" autocomplete="username" required />
+          </label>
+          <label>
+            Password
+            <input type="password" name="password" autocomplete="current-password" required />
+          </label>
+          <button type="submit">Sign In</button>
+        </form>
+
+        <p class="tip">
+          Tip: if the URL contains <code>?sid=KNOWN-VALUE</code>, the page will preserve that session cookie
+          before login for testing.
+        </p>
+
+        <pre id="login-output">Waiting for form submission...</pre>
+      </section>
+    </main>
+
+    <script src="/js/shared.js"></script>
+    <script src="/js/login.js"></script>
+  </body>
+</html>

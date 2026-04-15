@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CYSE 411 Review Lab</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <p class="eyebrow">CYSE 411</p>
+        <h1>Advanced Security Review Lab</h1>
+        <p class="lede">
+          This app is intentionally unsafe. Your job is to read the code, explain the trust failures, and
+          repair the right thing.
+        </p>
+      </section>
+
+      <section class="panel">
+        <h2>Routes</h2>
+        <nav class="nav-grid">
+          <a class="nav-card" href="/login">Login</a>
+          <a class="nav-card" href="/notes">Notes</a>
+          <a class="nav-card" href="/settings">Settings</a>
+          <a class="nav-card" id="admin-link" href="/admin">Admin</a>
+        </nav>
+      </section>
+
+      <section class="panel">
+        <h2>Current Session</h2>
+        <pre id="session-box">Checking session...</pre>
+      </section>
+
+      <section class="panel">
+        <h2>Seed Accounts</h2>
+        <ul class="simple-list">
+          <li><code>admin / admin123</code></li>
+          <li><code>alice / wonderland</code></li>
+          <li><code>bob / builder</code></li>
+        </ul>
+      </section>
+    </main>
+
+    <script src="/js/shared.js"></script>
+    <script src="/js/index.js"></script>
+  </body>
+</html>

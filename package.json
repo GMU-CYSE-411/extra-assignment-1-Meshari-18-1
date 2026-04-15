@@ -1,0 +1,16 @@
+{
+  "name": "extra-assignment-student",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Advanced secure code review lab for CYSE 411.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "init-db": "node init-db.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.2",
+    "sqlite3": "^5.1.7"
+  }
+}
