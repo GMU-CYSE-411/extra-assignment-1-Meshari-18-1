@@ -1,6 +1,19 @@
 const fs = require("fs");
 const path = require("path");
+
+const crypto = require("crypto");
+const {promisify} = require("util");
 const { DEFAULT_DB_FILE, openDatabase } = require("./db");
+
+
+const scrypt = promisify(crypto.scrypt);
+
+
+async function hashPassword(password) {
+  const salt = crypto.randomBytes(16).toString("hex");
+  const derivedKey = await scrypt(password, salt, 64);
+  return `${salt}:${derivedKey.toString("hex")}`;
+}
 
 async function initializeDatabase() {
   const analysisDir = path.dirname(DEFAULT_DB_FILE);
@@ -16,7 +29,7 @@ async function initializeDatabase() {
     CREATE TABLE users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       username TEXT NOT NULL UNIQUE,
-      password TEXT NOT NULL,
+      password_hash TEXT NOT NULL,
       role TEXT NOT NULL,
       display_name TEXT NOT NULL
     )
@@ -53,19 +66,25 @@ async function initializeDatabase() {
     )
   `);
 
+
+  const adminPasswordHash = await hashPassword("admin123");
+  const alicePasswordHash = await hashPassword("wonderland");
+  const bobPasswordHash = await hashPassword("builder");
+
+
   await db.run(
     "INSERT INTO users (username, password, role, display_name) VALUES (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?)",
     [
       "admin",
-      "admin123",
+      adminPasswordHash,
       "admin",
       "Administrator",
       "alice",
-      "wonderland",
+      alicePasswordHash,
       "student",
       "Alice Analyst",
       "bob",
-      "builder",
+      bobPasswordHash,
       "student",
       "Bob Builder"
     ]
