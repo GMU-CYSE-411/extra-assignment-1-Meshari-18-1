@@ -8,26 +8,45 @@
     }
 
     if (user.role !== "admin") {
-      document.getElementById("admin-warning").textContent =
-        "The client says this is not your area, but the page still tries to load admin data.";
-    } else {
-      document.getElementById("admin-warning").textContent = "Authenticated as admin.";
+      document.getElementById("admin-warning").textContent = "Admin access required.";
+      return;
     }
 
+    document.getElementById("admin-warning").textContent = "Authenticated as admin.";
+
+
     const result = await api("/api/admin/users");
-    document.getElementById("admin-users").innerHTML = result.users
-      .map(
-        (entry) => `
-          <tr>
-            <td>${entry.id}</td>
-            <td>${entry.username}</td>
-            <td>${entry.role}</td>
-            <td>${entry.displayName}</td>
-            <td>${entry.noteCount}</td>
-          </tr>
-        `
-      )
-      .join("");
+    const adminUsers = document.getElementById("admin-users");
+    adminUsers.textContent = ""; // This can give Clear existing content, which is useful
+
+    for (const user of result.users) {
+      const row = document.createElement("tr");
+      
+      const idCell = document.createElement("td");
+      idCell.textContent = entery.id;
+      
+      const usernameCell = document.createElement("td");
+      usernameCell.textContent = user.username;
+
+      const roleCell = document.createElement("td");
+      roleCell.textContent = user.role;
+
+      const disabledCell = document.createElement("td");
+      disabledCell.textContent = entery.displayName;
+
+      const noteCountCell = document.createElement("td");
+      noteCountCell.textContent = user.noteCount;
+
+      row.appendChild(idCell);
+      row.appendChild(usernameCell);
+      row.appendChild(roleCell);
+      row.appendChild(disabledCell);
+      row.appendChild(noteCountCell);
+
+      adminUsers.appendChild(row);
+    }
+
+
   } catch (error) {
     document.getElementById("admin-warning").textContent = error.message;
   }
