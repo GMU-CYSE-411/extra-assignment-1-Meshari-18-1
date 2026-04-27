@@ -1,9 +1,15 @@
+function getCsrfToken() {
+  const tokenElement = document.querySelector('meta[name="csrf-token"]');
+  return tokenElement ? tokenElement.content : "";
+}
 async function api(path, options = {}) {
   const response = await fetch(path, {
     headers: {
       "Content-Type": "application/json",
+      "x-csrf-token": getCsrfToken(),
       ...(options.headers || {})
     },
+
     credentials: "same-origin",
     ...options
   });
