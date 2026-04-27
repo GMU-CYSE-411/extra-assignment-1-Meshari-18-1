@@ -19,23 +19,23 @@
     const adminUsers = document.getElementById("admin-users");
     adminUsers.textContent = ""; // This can give Clear existing content, which is useful
 
-    for (const user of result.users) {
+    for (const entry of result.users) {
       const row = document.createElement("tr");
       
       const idCell = document.createElement("td");
-      idCell.textContent = entery.id;
+      idCell.textContent = entry.id;
       
       const usernameCell = document.createElement("td");
-      usernameCell.textContent = user.username;
+      usernameCell.textContent = entry.username;
 
       const roleCell = document.createElement("td");
-      roleCell.textContent = user.role;
+      roleCell.textContent = entry.role;
 
       const disabledCell = document.createElement("td");
-      disabledCell.textContent = entery.displayName;
+      disabledCell.textContent = entry.displayName;
 
       const noteCountCell = document.createElement("td");
-      noteCountCell.textContent = user.noteCount;
+      noteCountCell.textContent = entry.noteCount;
 
       row.appendChild(idCell);
       row.appendChild(usernameCell);
